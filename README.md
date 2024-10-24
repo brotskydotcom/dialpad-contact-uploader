@@ -39,7 +39,7 @@ These examples assume a macOS environment for steps 1, 2, 4, 5, and 8. You will 
     ```
 8. Export a DIALPAD_API_KEY environment variable whose value is the very-long-string-of-characters that is your account's Dialpad API key.
     ```zsh
-    DIALPAD_API_KEY=yourApiKeyGoesHere
+    export DIALPAD_API_KEY=yourApiKeyGoesHere
     ```
 9. In your current directory, create a CSV files named "contacts.csv" containing the data you want to upload.  It should have exactly four columns, with these labels in this order:
     ```
