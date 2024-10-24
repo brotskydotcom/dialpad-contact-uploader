@@ -24,7 +24,6 @@ These examples assume a macOS environment for steps 1, 2, 4, 5, and 8. You will 
     ```zsh
     curl -L -o ~/Downloads/dialpad-contact-uploader-main.zip https://github.com/brotskydotcom/dialpad-contact-uploader/archive/refs/heads/main.zip
     unzip -d ~/Downloads ~/Downloads/dialpad-contact-uploader-main.zip
-    cd ~/Downloads/dialpad-contact-uploader-main
     ```
 5. Change to download root directory.
     ```zsh
