@@ -76,8 +76,9 @@ class RateLimiter:
     def retry_call(self, response: requests.Response) -> bool:
         if response.status_code == 400:
             body = response.json()
-            errors: list = body.get("errors", [])
-            message: str = body.get("message", "")
+            error: dict = body.get("error", {})
+            errors: list = error.get("errors", [])
+            message: str = error.get("message", "")
             if message.find("rate") >= 0:
                 if self.verbose:
                     print(f"{message}: backing off {self.back_off} seconds")
