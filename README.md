@@ -41,7 +41,7 @@ These examples assume a macOS environment for steps 1, 2, 4, 5, and 8. You will 
     ```zsh
     export DIALPAD_API_KEY=yourApiKeyGoesHere
     ```
-9. In your current directory, create a CSV files named "contacts.csv" containing the data you want to upload.  It should have exactly four columns, with these labels in this order:
+9. In your current directory, create a CSV file named "contacts.csv" containing the data you want to upload.  It should have exactly four columns, with these labels in this order:
     ```
     First_Name,Last_Name,Phones,Email
     ```
@@ -52,7 +52,7 @@ These examples assume a macOS environment for steps 1, 2, 4, 5, and 8. You will 
  
 The script will validate the entries in the spreadsheet, spitting out errors for lines it can't validate, and then attempt to upload the lines it could validate.  It will provide a progress report every 100 contacts (each group of 100 takes 60-90 seconds to upload), and it will provide error messages for each contact that Dialpad won't accept (typically because of issues with the phone number).
 
-Running the script another time with some of the same contact information will replace information for those contacts, so you can just clean up any errors in your spreadsheet and then upload the whole thing again.
+Running the script another time with existing contact information will replace information for those contacts, so you can just clean up any errors in your spreadsheet and then upload the whole thing again.
 
 You can get the script to do validation only (with no upload) by using `--export` rather than `--upload` in step 10. When invoked this way, it will create a CSV file with validated data with the same name as the input file but with `.export.csv` as its suffix.
 
