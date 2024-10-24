@@ -27,7 +27,7 @@ from operator import add
 from dateutil.parser import parse as parse_time
 from email_validator import validate_email, EmailNotValidError
 
-PERSONAL_AREA_CODES = {
+NON_GEOGRAPHIC_AREA_CODES = {
     "500",
     "521",
     "522",
@@ -44,7 +44,6 @@ PERSONAL_AREA_CODES = {
     "577",
     "588",
 }
-AMBIGUOUS_AREA_CODES = {"664"}
 
 
 def parse_phones(value: str) -> (list[str], list[str]):
@@ -70,10 +69,8 @@ def parse_phones(value: str) -> (list[str], list[str]):
             errors.append(
                 f"Invalid prefix after area code (starts with 0 or 1): {candidate}"
             )
-        elif digits[0:3] in PERSONAL_AREA_CODES:
-            errors.append(f"Personal/Text-service area code: {candidate}")
-        elif digits[0:3] in AMBIGUOUS_AREA_CODES:
-            errors.append(f"Area code in more than one country: {candidate}")
+        elif digits[0:3] in NON_GEOGRAPHIC_AREA_CODES:
+            errors.append(f"Non-geographic area code: {candidate}")
         else:
             phones.append("+1" + digits)
     return phones, errors

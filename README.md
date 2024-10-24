@@ -54,3 +54,15 @@ These examples assume a macOS environment for steps 1, 2, 4, 5, and 8. You will 
 The script will validate the entries in the spreadsheet, spitting out errors for lines it can't validate, and then attempt to upload the lines it could validate.  It will provide a progress report every 100 contacts (each group of 100 takes 60-90 seconds to upload), and it will provide error messages for each contact that Dialpad won't accept (typically because of issues with the phone number).
 
 Running the script another time with some of the same contact information will replace information for those contacts, so you can just clean up any errors in your spreadsheet and then upload the whole thing again.
+
+## Phone number validation
+
+Dialpad does very careful phone number validation on every uploaded contact, and rejects any whose numbers are invalid.  Unfortunately, it doesn't give much information about why it has rejected the number. So this script does a bunch of validations before it even tries the upload, and rejects numbers that fail the validation.  Here are the validations performed by the script:
+
+1. If you want to put more than one phone number in your "Phones" field, separate them with a forward slash `/` or a vertical bar `|`; any other characters except `+` and digits will be ignored. 
+2. If a number starts with '+' or '011', it's assumed to be an international number and no more validation is done. (The 011 is replaced by '+', because Dialpad requires that.)
+3. If a number has a '+' anywhere but at the front, it's rejected, because valid numbers can only have a '+' at the front.
+4. If a number has fewer than 10 digits, it's rejected, because Dialpad requires area codes on all numbers.
+5. If a number has more than 10 digits, it's assumed to be an international number so a '+' is prepended and no more validation is done.
+6. If a number, after the area code, has a prefix starting with "0" or "1" (such as `510-123-4567`), it's rejected because North American prefixes can't start with either of those numbers. (This typically means it's an international number that has not been prefixed correctly with a '+'.)
+7. If a number has one of the "non-geographic" (aka 5XX) area codes that are reserved for machine-to-machine communication, Dialpad will not call it, so it is rejected.
