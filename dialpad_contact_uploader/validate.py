@@ -66,6 +66,10 @@ def parse_phones(value: str) -> (list[str], list[str]):
             errors.append(f"Not enough digits: {candidate}")
         elif len(digits) > 10:
             phones.append("+" + digits)
+        elif digits[3:4] in ["0", "1"]:
+            errors.append(
+                f"Invalid prefix after area code (starts with 0 or 1): {candidate}"
+            )
         elif digits[0:3] in PERSONAL_AREA_CODES:
             errors.append(f"Personal/Text-service area code: {candidate}")
         elif digits[0:3] in AMBIGUOUS_AREA_CODES:
